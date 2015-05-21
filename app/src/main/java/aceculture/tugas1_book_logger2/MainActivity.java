@@ -4,14 +4,32 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity   {
+    Button inputButton;
+    ListView listofBook;
+    EditText inputJudulBuku, inputPengarangBuku, inputJmlHlmBuku;
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        listofBook= (ListView) findViewById(R.id.listBook);
+        inputJudulBuku= (EditText) findViewById(R.id.inputJudul);
+        inputPengarangBuku= (EditText) findViewById(R.id.inputPengarang);
+        inputJmlHlmBuku= (EditText) findViewById(R.id.inputJmlHlm);
+        inputButton= (Button) findViewById(R.id.inputBtn);
     }
 
 
