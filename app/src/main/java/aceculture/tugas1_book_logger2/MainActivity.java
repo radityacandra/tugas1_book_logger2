@@ -1,7 +1,9 @@
 package aceculture.tugas1_book_logger2;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -44,6 +46,18 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         listItem = new ListBookAdapter();
         ListView listItemView = (ListView)findViewById(R.id.listBook);
         listItemView.setAdapter(listItem);
+
+        listItemView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+                                    long arg3) {
+
+                listViewBook chapter = listItem.getListViewBook(arg2);
+
+                showDeleteDialog(chapter);
+
+            }
+        });
 
         Button tambah = (Button)findViewById(R.id.inputBtn);
         tambah.setOnClickListener(this);
@@ -155,5 +169,32 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // mmbuat alert dialog untuk fungsi hapus buku
+    private void showDeleteDialog(final listViewBook chapter){
+        AlertDialog.Builder deleteDialog=new AlertDialog.Builder(this);
+        deleteDialog.setMessage("Anda yakin untuk menghapus \n"+chapter.JudulBuku+"?");
+        deleteDialog.setPositiveButton("Ya",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+                ListOfViewBook.remove(chapter);
+                //listOfBook.remove(bookTitle);
+                // setelah menghapus, kita perlu meng-update listview
+                //adapter.notifyDataSetChanged();
+                listItem = new ListBookAdapter();
+                ListView listItemView = (ListView)findViewById(R.id.listBook);
+                listItemView.setAdapter(listItem);
+            }
+        });
+        deleteDialog.setNegativeButton("Tidak",new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        deleteDialog.show();
     }
 }
