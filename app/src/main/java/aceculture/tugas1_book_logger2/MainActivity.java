@@ -51,11 +51,27 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        String terimaJudul, terimaPengarang, terimaHalaman;
         TextView inputJudul = (TextView)findViewById(R.id.inputJudul);
         TextView inputPengarang = (TextView)findViewById(R.id.inputPengarang);
         TextView inputHalaman = (TextView)findViewById(R.id.inputJmlHlm);
         switch (v.getId()){
+            case R.id.inputBtn:
+                terimaJudul = inputJudul.getText().toString();
+                terimaPengarang = inputPengarang.getText().toString();
+                terimaHalaman = inputHalaman.getText().toString();
 
+                listViewBook item = new listViewBook();
+                item.JudulBuku = terimaJudul;
+                item.PengarangBuku = terimaPengarang;
+                item.JmlHlmBuku = terimaHalaman;
+                ListOfViewBook.add(item);
+
+                listItem = new ListBookAdapter();
+                ListView listItemView = (ListView)findViewById(R.id.listBook);
+                listItemView.setAdapter(listItem);
+
+                break;
         }
     }
 
@@ -106,10 +122,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
     }
 
-
+    public static List<listViewBook> ListOfViewBook = new ArrayList<listViewBook>();
     public List<listViewBook> getDatafromListBook()
     {
-        List<listViewBook> ListOfViewBook = new ArrayList<listViewBook>();
         if (true){
             listViewBook item = new listViewBook();
             item.JudulBuku = "Naruto";
@@ -118,7 +133,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             ListOfViewBook.add(item);
         }
         return ListOfViewBook;
-
     }
 
     @Override
