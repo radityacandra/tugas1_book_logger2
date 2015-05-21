@@ -35,10 +35,10 @@ public class MainActivity extends ActionBarActivity   {
         inputJmlHlmBuku= (EditText) findViewById(R.id.inputJmlHlm);
         inputButton= (Button) findViewById(R.id.inputBtn);
 
-        getDatafromListBook();
-        ArrayAdapter<String> adapter;
 
-        adapter=new ArrayAdapter<String>(this, android.R.layout.activity_list_item,getDatafromListBook());
+        //ArrayAdapter<String> adapter;
+
+        //adapter=new ArrayAdapter<String>(this, android.R.layout.activity_list_item,getDatafromListBook());
         listOfBook.setAdapter(adapter);
 
 
