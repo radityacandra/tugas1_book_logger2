@@ -1,15 +1,21 @@
 package aceculture.tugas1_book_logger2;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,25 +29,21 @@ public class MainActivity extends ActionBarActivity   {
     ArrayAdapter<String> adapter;
 
 
-
+    ListBookAdapter listItem;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        listOfBook= (ListView) findViewById(R.id.listBook);
         inputJudulBuku= (EditText) findViewById(R.id.inputJudul);
         inputPengarangBuku= (EditText) findViewById(R.id.inputPengarang);
         inputJmlHlmBuku= (EditText) findViewById(R.id.inputJmlHlm);
         inputButton= (Button) findViewById(R.id.inputBtn);
 
-
-        //ArrayAdapter<String> adapter;
-
-        //adapter=new ArrayAdapter<String>(this, android.R.layout.activity_list_item,getDatafromListBook());
-        listOfBook.setAdapter(adapter);
-
-
+        //listOfBook.setAdapter(adapter);
+        listItem = new ListBookAdapter();
+        ListView listItemView = (ListView)findViewById(R.id.listBook);
+        listItemView.setAdapter(listItem);
 
     }
 
@@ -51,6 +53,47 @@ public class MainActivity extends ActionBarActivity   {
         String PengarangBuku;
         String JmlHlmBuku;
     }
+
+    public List<listViewBook> DataListBook = getDatafromListBook();
+    public class ListBookAdapter extends BaseAdapter{
+
+        @Override
+        public int getCount() {
+            return DataListBook.size();
+        }
+
+        @Override
+        public Object getItem(int arg0) {
+            return DataListBook.get(arg0);
+        }
+
+        @Override
+        public long getItemId(int arg0) {
+            return arg0;
+        }
+
+        @Override
+        public View getView(int arg0, View arg1, ViewGroup arg2) {
+            if (arg1==null){
+                LayoutInflater inflater = (LayoutInflater) MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                arg1 = inflater.inflate(R.layout.listitem, arg2,false);
+            }
+            TextView judul = (TextView)arg1.findViewById(R.id.judul);
+            TextView pengarang = (TextView)arg1.findViewById(R.id.pengarang);
+            TextView jumlahBuku = (TextView)arg1.findViewById(R.id.jumlah);
+
+            listViewBook item = DataListBook.get(arg0);
+            judul.setText(item.JudulBuku);
+            pengarang.setText(item.PengarangBuku);
+            jumlahBuku.setText(item.JmlHlmBuku);
+            return arg1;
+        }
+
+        public listViewBook getListViewBook(int position){
+            return DataListBook.get(position);
+        }
+    }
+
 
     public List<listViewBook> getDatafromListBook()
     {
