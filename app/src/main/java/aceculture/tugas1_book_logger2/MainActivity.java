@@ -9,15 +9,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity   {
     Button inputButton;
     ListView listofBook;
     EditText inputJudulBuku, inputPengarangBuku, inputJmlHlmBuku;
-
-
-
 
 
     @Override
@@ -31,6 +29,28 @@ public class MainActivity extends ActionBarActivity   {
         inputJmlHlmBuku= (EditText) findViewById(R.id.inputJmlHlm);
         inputButton= (Button) findViewById(R.id.inputBtn);
     }
+
+    public class listViewBook
+    {
+        String JudulBuku;
+        String PengarangBuku;
+        String JmlHlmBuku;
+    }
+
+    public List<listViewBook> getDatafromListBook()
+    {
+        List<listViewBook> ListOfViewBook = new ArrayList<listViewBook>();
+        if (true){
+            listViewBook item = new listViewBook();
+            item.JudulBuku = "Naruto";
+            item.PengarangBuku = "Masashi Kishimoto";
+            item.JmlHlmBuku = "60";
+            ListOfViewBook.add(item);
+        }
+        return ListOfViewBook;
+
+    }
+
 
 
     @Override
