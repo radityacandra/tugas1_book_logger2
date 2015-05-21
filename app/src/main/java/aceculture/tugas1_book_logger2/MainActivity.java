@@ -1,6 +1,7 @@
 package aceculture.tugas1_book_logger2;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,13 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity   {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener {
     Button inputButton;
     ListView listOfBook;
     EditText inputJudulBuku, inputPengarangBuku, inputJmlHlmBuku;
 
     ArrayAdapter<String> adapter;
-
 
     ListBookAdapter listItem;
     @Override
@@ -45,6 +45,18 @@ public class MainActivity extends ActionBarActivity   {
         ListView listItemView = (ListView)findViewById(R.id.listBook);
         listItemView.setAdapter(listItem);
 
+        Button tambah = (Button)findViewById(R.id.inputBtn);
+        tambah.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        TextView inputJudul = (TextView)findViewById(R.id.inputJudul);
+        TextView inputPengarang = (TextView)findViewById(R.id.inputPengarang);
+        TextView inputHalaman = (TextView)findViewById(R.id.inputJmlHlm);
+        switch (v.getId()){
+
+        }
     }
 
     public class listViewBook
@@ -108,10 +120,6 @@ public class MainActivity extends ActionBarActivity   {
         return ListOfViewBook;
 
     }
-
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
