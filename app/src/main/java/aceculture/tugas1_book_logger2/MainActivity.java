@@ -4,15 +4,70 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity   {
+    Button inputButton;
+    ListView listOfBook;
+    EditText inputJudulBuku, inputPengarangBuku, inputJmlHlmBuku;
+
+    ArrayAdapter<String> adapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        listOfBook= (ListView) findViewById(R.id.listBook);
+        inputJudulBuku= (EditText) findViewById(R.id.inputJudul);
+        inputPengarangBuku= (EditText) findViewById(R.id.inputPengarang);
+        inputJmlHlmBuku= (EditText) findViewById(R.id.inputJmlHlm);
+        inputButton= (Button) findViewById(R.id.inputBtn);
+
+        getDatafromListBook();
+        ArrayAdapter<String> adapter;
+
+        adapter=new ArrayAdapter<String>(this, android.R.layout.activity_list_item,getDatafromListBook());
+        listOfBook.setAdapter(adapter);
+
+
+
     }
+
+    public class listViewBook
+    {
+        String JudulBuku;
+        String PengarangBuku;
+        String JmlHlmBuku;
+    }
+
+    public List<listViewBook> getDatafromListBook()
+    {
+        List<listViewBook> ListOfViewBook = new ArrayList<listViewBook>();
+        if (true){
+            listViewBook item = new listViewBook();
+            item.JudulBuku = "Naruto";
+            item.PengarangBuku = "Masashi Kishimoto";
+            item.JmlHlmBuku = "60";
+            ListOfViewBook.add(item);
+        }
+        return ListOfViewBook;
+
+    }
+
+
+
 
 
     @Override
